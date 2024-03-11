@@ -1,0 +1,33 @@
+/* 스타일을 적용할 때는 하위까지 적어줘야 나중에 input이 추가되어도 스타일적용할 때 문제가 생기지 않는다. */
+
+
+.TodoEditor .editor_wrapper {
+  width: 100%;
+  display: flex;
+  gap: 10px;
+}
+
+
+.TodoEditor input {     
+  flex: 1;
+  box-sizing: border-box;
+  border: 1px solid rgb(172, 219, 208);
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.TodoEditor input:focus {
+  outline: none;
+  border: 1px solid rgb(183, 147, 222);
+  background-color: rgb(255, 229, 244);
+}
+
+.TodoEditor button {
+  cursor: pointer;
+  color: rgb(255, 255, 255);
+  font-size: 14px;
+  padding: 5px;
+  border: none;
+  background-color: rgb(186, 155, 205);
+  border-radius: 5px;
+}

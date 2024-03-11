@@ -1,0 +1,12 @@
+.App {
+  max-width: 500px;
+  padding: 20px;
+  width: 100%;
+  border: 2px solid rgb(161, 205, 217);
+  border-radius: 10px;
+  margin: 0 auto;
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
