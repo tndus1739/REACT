@@ -12,14 +12,14 @@
   margin-right: 10px;
   border: none;
   border-radius: 5px;
-  background-color: #ececec;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  background-color: #faf1ff;
+  /* padding-top: 1px; */
+  /* padding-bottom: 1px; */
   padding-left: 20px;
   padding-right: 20px;
   cursor: pointer;
-  font-family: "Nanum Pen Script";
-  font-size: 18px;
+  font-family: "Dongle", sans-serif;
+  font-size: 25px;
 }
 
 .DiaryList .menu_wrapper .right_col {

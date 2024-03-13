@@ -1,0 +1,11 @@
+.emotion {
+
+  display: flex;
+  flex-wrap: wrap;
+}
+
+
+.emotion img {
+  width: 60px;
+  height: 60px;
+}
