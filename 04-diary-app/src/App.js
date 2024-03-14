@@ -20,7 +20,7 @@ import ImageTest from './test/ImageTest';
 //  nockData : 가짜 데이터
 const mockData = [
   {
-      id : "mock1",
+      id : "mock1",   // id : db 고유값
       date:new Date().getTime() -1,  // 어제날짜
       content : "mock1",
       emotionId : 2
@@ -64,12 +64,12 @@ export const DiaryStateContext = React.createContext();   // 상태값을 전송
 export const DiaryDispatchContext = React.createContext();   // 이벤트를 처리하는 context ,  상태값을 변경
 
 // 상태값을 변경하는 reducer 함수 정의
-function reducer (state, action) {     // 밑에 있는   data가 state 로 들어오게 됨
+function reducer (state, action) {     // 밑에 있는(81)  data가 state 로 들어오게 됨 , action에는 밑에 있는 dispatch  안의 인자들이 들어온다
   switch (action.type) {
     case "INIT":
       return action.data;
     case "CREATE":
-      return [action.data, ...state];
+      return [action.data, ...state];  /// 기존의 state : (67)dml state
 
   }
 }     
@@ -78,7 +78,7 @@ function reducer (state, action) {     // 밑에 있는   data가 state 로 들�
 function App() {
 
   // 상태를 처리하는 변수
-  const [data , dispatch] = useReducer(reducer,[]);   // dispatch를 통해서 reducer를 호출함, return값으로 아래의 배열안에 nockdata가  data로 값이 들어옴
+  const [data , dispatch] = useReducer(reducer,[]);   // dispatch(함수)를 통해서 reducer를 호출함, return값으로 아래의 배열안에 nockdata가  data로 값이 들어옴
 
   // useEffect 컴포넌트가 로드될 때 1번만 실행
   // 컴포넌트가 처름 로드될 때 dispatch를 호출해서 data에 mockData의 값을 할당
@@ -97,7 +97,7 @@ function App() {
 
   // 하위 컴포넌트에서 요청하는 이벤트 처리 : onCreate , onUpdate , onDelete
 
-  const onCreate = () => {
+  const onCreate = (date , content , emotionId) => {
 
   }
 
@@ -113,7 +113,7 @@ function App() {
 
 // 2. context provider를 사용해서 상태를 처리할 하위 컴포넌트를 그룹핑
     <DiaryStateContext.Provider value={data}>
-    <DiaryDispatchContext.Provider value={{onCreate , onUpdate , onDelete}}>  {/* 하위 컴포넌트에서 이벤트가 올라옴  */}
+    <DiaryDispatchContext.Provider value={{onCreate , onUpdate , onDelete}}>  {/* 하위 컴포넌트에서 값을 가지고 이벤트가 올라옴  */}
       
     
 
@@ -124,7 +124,7 @@ function App() {
 
 
     <Header/>
-    <hr/>
+    <hr className='hrhr'/>
     <p/><p/><p/><p/><p/><p/><p/>
   
 
@@ -142,7 +142,7 @@ function App() {
     </Routes>
 
     <p/><p/><p/><p/><p/><p/><p/>
-    <hr/>
+    <hr className='hrhr'/>
     <Footer/>
 
 

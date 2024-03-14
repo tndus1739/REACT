@@ -53,10 +53,11 @@
 
 .Viewer .content_wrapper {
   width: 100%;
-  background-color: #ececec;
+  background-color: #ececec5e;
   border-radius: 5px;
   word-break: keep-all;
   overflow-wrap: break-word;
+  border: 0.3px solid #fff;
 }
 
 .Viewer .content_wrapper p {
