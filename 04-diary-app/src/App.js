@@ -1,6 +1,6 @@
 
 import './App.css';
-import React , { useEffect, useReducer } from 'react';
+import React , { useEffect, useReducer, useRef } from 'react';
 
 // Routing 처리 라이브러리 import <--요청 ( /company)  ==> 요청에 대해서 컴포넌트를 연결
 // route를 사용하려면 routes가 필요 , link도 필요함
@@ -20,21 +20,21 @@ import ImageTest from './test/ImageTest';
 //  nockData : 가짜 데이터
 const mockData = [
   {
-      id : "mock1",   // id : db 고유값
+      id : 0,   // id : db 고유값    //id값은 밑에서 올라오지 않는다. 
       date:new Date().getTime() -1,  // 어제날짜
       content : "mock1",
       emotionId : 2
   },
 
   {
-    id : "mock2",
+    id : 1,
     date:new Date().getTime() -2,  // 2일 전
     content : "mock2",
     emotionId : 3
   },
   
   {
-    id : "mock3",
+    id : 2,
     date:new Date().getTime() -3,  // 3일 전
     content : "mock3",
     emotionId : 4
@@ -64,12 +64,12 @@ export const DiaryStateContext = React.createContext();   // 상태값을 전송
 export const DiaryDispatchContext = React.createContext();   // 이벤트를 처리하는 context ,  상태값을 변경
 
 // 상태값을 변경하는 reducer 함수 정의
-function reducer (state, action) {     // 밑에 있는(81)  data가 state 로 들어오게 됨 , action에는 밑에 있는 dispatch  안의 인자들이 들어온다
+function reducer (state, action) {     // 밑에 있는(81)  data가 state 로 들어오게 됨 , action에는 밑에 있는(81) dispatch  안의 인자들이 들어온다
   switch (action.type) {
     case "INIT":
-      return action.data;
+      return action.data;    // action.data : mock 데이터를 넣어놓음(94)
     case "CREATE":
-      return [action.data, ...state];  /// 기존의 state : (67)dml state
+      return [action.data, ...state];  /// 기존의 state : (67)의 state
 
   }
 }     
@@ -79,6 +79,11 @@ function App() {
 
   // 상태를 처리하는 변수
   const [data , dispatch] = useReducer(reducer,[]);   // dispatch(함수)를 통해서 reducer를 호출함, return값으로 아래의 배열안에 nockdata가  data로 값이 들어옴
+
+  // usrRef Hook을 사용해서 고유한 값을 생성 : id필드에 적용
+  const idRef = useRef(3);
+
+
 
   // useEffect 컴포넌트가 로드될 때 1번만 실행
   // 컴포넌트가 처름 로드될 때 dispatch를 호출해서 data에 mockData의 값을 할당
@@ -96,8 +101,20 @@ function App() {
   );
 
   // 하위 컴포넌트에서 요청하는 이벤트 처리 : onCreate , onUpdate , onDelete
-
+  // 하위 컴포넌트에서 값이 올라옴
+  // date : yyyy-mm-ddd  --> TimeTemp 형식의 날자 형식으로 변환
   const onCreate = (date , content , emotionId) => {
+    dispatch ({
+        type : "CREATE",
+        data : {    // 객체
+          id : idRef.current++,
+          date: new Date(date).getTime(),                  // date : yyyy-mm-ddd  --> TimeTemp 형식의 날자 형식으로 변환
+          content : content,
+          emotionId : emotionId,
+
+        }
+
+    });
 
   }
 

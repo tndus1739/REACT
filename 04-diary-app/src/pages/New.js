@@ -11,18 +11,20 @@ function New(props) {
   const navigate = useNavigate();
 
   // Contextdml Provider에 onCreate 를 연결 : useContext
-  const {onCreate} = useContext(DiaryDispatchContext)
+  const {onCreate} = useContext(DiaryDispatchContext)      // DiaryDispatchContex : App 에 있음
 
-  const onsubmit = (data) => {                                 // data : onsubmit에서 올라오는 객체 (배열 X)
+  const onsubmit = (data) => {                                 // data : onsubmit에서 올라오는 객체 (state) (배열 X)
     console.log("글쓰기 호출됨");
 
     // 구조 분해 할당 : ES6(2015)에서 적용 , 객체의 필드의 값을 새로운 변수에 할당
-
+    // 불러온 값을 분해 
     const {date , content , emotionId} = data ;  // (글쓴 날짜 , 내용 , Id값 )
 
     onCreate (date , content , emotionId);
       // 완료되면 해당 페이지로 이동
       navigate('/',{replace:true});
+
+      //{replace:true} :  뒤로 가기 방지
 
 
 
@@ -35,7 +37,7 @@ function New(props) {
                           type="positive" onClick={() => {navigate(-1)}} />}
         />
 
-        <Editor onsubmit = {onsubmit}/>  
+        <Editor onSubmit = {onsubmit}/>  
         {/* 글쓴 데이터 값을 담아서 Props로 전송 */}
 
     </div>

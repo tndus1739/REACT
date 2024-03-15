@@ -52,29 +52,56 @@ export const getEmotionImgById = (emotionId) => {
 export const emotionList = [
 
   { 
-    id: "1",
+    id: 1,
     name : "완전 좋음",
     img : getEmotionImgById(1),
   },
   { 
-    id: "2",
+    id: 2,
     name : "좋음",
     img : getEmotionImgById(2),
   },
   { 
-    id: "3",
+    id: 3,
     name : "보통",
     img : getEmotionImgById(3),
   },
   { 
-    id: "4",
+    id: 4,
     name : "나쁨",
     img : getEmotionImgById(4),
   },
   { 
-    id: "5",
+    id: 5,
     name : "완전 나쁨",
     img : getEmotionImgById(5),
   },
 
 ];
+
+
+// 날자를 인풋받아서 yyyy-mm-dd 형식으로 리턴을 돌려주는 함수
+export const getFormattedDate = (targetDate) => {
+  // 년도만 추출 (yyyy)
+  let year = targetDate.getFullYear();    // getFullYear(); : yyyy형식으로 출려됨
+
+  // 월만 추출 : 3월 -> 03월 일 때 ( 2월 + 1) : 0월 -> + 1    // getMonth() 일 때마나 데이터 형식이 0으로 출력되기 때문에 1을 더해주어야 한다.
+  let month = targetDate.getMonth() + 1 ;
+  // 일만 추출
+  let day = targetDate.getDate();
+
+  // month의 값이 10 이하일 경우 0을 붙여서 처리 
+  if (month < 10) {
+    month = `0${month}`;
+  }
+
+  // day의 값이 10 이하일 경우 0을 붙여서 처리 
+  if (day < 10) {
+    day = `0${day}`;
+  }
+
+  return `${year}-${month}-${day}`;
+
+}
+
+
