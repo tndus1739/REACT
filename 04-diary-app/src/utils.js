@@ -105,3 +105,31 @@ export const getFormattedDate = (targetDate) => {
 }
 
 
+// 함수 :  해당 날짜를  TimesTemp 형식으로 인풋받아서 해당월의 시작일, 마지막일을 return
+
+export const getMonthRangeByDate = (date) => {
+
+    // 년 월의 시작 날짜   
+    const beginTimeStemp = new Date(
+        date.getFullYear(),           // yyyy
+        date.getMonth(),              // mm 
+        1,                            // 1일
+        0,                            // 0시
+        0,                            // 0분
+        0                             // 0초
+
+    );
+
+    // 년 월의 마지막 날짜 (각 월마다 마지막 날짜가 다름)
+    const endTimeStemp = new Date(
+      date.getFullYear(),              // 년도
+      date.getMonth() + 1,             // 다음달 월 
+      0,                               // 0일
+      23,                              // 23시
+      59,                              // 59분
+      59                               // 59초
+
+    );
+
+  return {beginTimeStemp , endTimeStemp};
+}
