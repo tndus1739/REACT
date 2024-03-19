@@ -7,6 +7,8 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
 
+// 생성할 때도 수정할 때도 Editor
+
 function Editor({initData , onSubmit}) {    //props선언    
   // onSubmit : 상위에 있는 컴포넌트과 연결이 되어야 한다. [상위 컴포넌트 : New 컴포넌트]
   // initData : 생성할 때는 사용하지 않고 수정할 때 사용한다. 

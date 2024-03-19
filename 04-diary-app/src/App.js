@@ -174,7 +174,7 @@ function App() {
     <hr className='hrhr'/>
     <p/><p/><p/><p/><p/><p/><p/>
   
-
+    {/* // 바뀌는 페이지 부분 */}
     <Routes>
 
       <Route path='/' element={<Home/>}></Route>

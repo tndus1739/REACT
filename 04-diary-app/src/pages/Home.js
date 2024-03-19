@@ -54,7 +54,10 @@ function Home(props) {
 
   return (
     <div>
-      <Header
+
+      
+
+      <Header   // {/* 모든 페이지에 출력되는 부분 */}
         title = {headerTitle}
         leftChild={<Button text={"<"} type="positive" 
             onClick ={ onDecreaseMonth}/>}
