@@ -19,7 +19,9 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table (name = "employees")
 public class Employee {
-		
+	
+	// entity : DB의 테이블의 컬럼을 연결
+	
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private long id; 

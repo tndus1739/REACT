@@ -11,8 +11,11 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class EmployeeService {
+public class EmployeeService {   // EmployeeRepository를 객체화해서 만들어 놓음
     private final EmployeeRepository employeeRepository;
+    
+    public void Test () {
+    }
     
     //사원 리스트 
     public List<Employee> getEmployeeList() {

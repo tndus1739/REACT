@@ -61,7 +61,7 @@ public class EmployeeController {
 	
 	
 	
-    private final EmployeeRepository employeeRepository;
+    private final EmployeeRepository employeeRepository;  // controller에서 Repository 직접하지말고 service통해서 하기
     private final EmployeeService employeeService; 
 
  // http://localhost:9999/api/employee

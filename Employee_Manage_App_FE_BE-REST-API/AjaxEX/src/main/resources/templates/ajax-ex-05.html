@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Ajax_Ex03</title>
+<script src = "https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+<body>
+	<h1> 05.get 요청 & parameter로 넘어오는 값을 DTO로 받기 </h1>
+	<hr>
+	<br>
+	<button onclick ="exFn()"> ajax 요청 함수 호출하기</button>
+</body>
+	<script type = "text/javascript">
+		const exFn = () => {
+			console.log ("함수호출성공");
+			
+			const val1 = 100;
+			// 한글이 url로 넘어갈때는 유니코드로 넘어간다.
+			
+			$.ajax({
+				// 서버로 보내는 요청방식 : get, post , put , patch , delete [type에는 요청방식이 들어감]
+				type : "get",
+				// 요청주소 : http://localhost:9696/ex05
+				url : "/ex05",
+				
+				// client의 데이터를 서버로 전송 -> {필드의 값} , {필드의 값} , {필드의 값} ...
+				data : {
+					  "param1" : val1,
+					  "param2" : "05 - 반갑습니다."
+					
+				} , 
+				
+				// 요청이 성공 했을 때 함수 실행하는 블락 , http 상태코드 : 200 ok [성공했을 때 보여지는 코드]
+				// res : 서버에서 보내는 값이 res인자로 들어옴 (서버로 받아온 값)
+				//       받아온 값을 가지고 Html을 만들어서 특정 태그에 집어 넣게 된다. , 랜더링 함 
+				//       (전체가 렌더링되는게 아니고 특정 블락만 렌더링)
+				success : function (res) {
+					console.log("성공 : " , res);
+					
+				},
+				// 요청이 실패했을 때 error블락의 함수가 실행됨
+				error : function (err) {
+					console.log("실패 : " , err)
+				}
+				
+				
+			}
+			)
+		}
+	</script>
+</html>
