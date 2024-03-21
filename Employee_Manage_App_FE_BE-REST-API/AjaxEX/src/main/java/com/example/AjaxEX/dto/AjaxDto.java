@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
+@Getter   // @Getter , @Setter 필수 
 @Setter
 @NoArgsConstructor // 자동으로 기본생성자 만들어줌
 
@@ -21,6 +21,8 @@ public class AjaxDto {
 		param2 = data2 ;
 		
 	}
+	
+	// 변수 이름이 파라미터로 넘어오는 변수 이름과 동일해야 한다. 
 	
 	private String param1 ;  // 주입된 값을 필드에 집어넣는다
 

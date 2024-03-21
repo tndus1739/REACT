@@ -8,16 +8,21 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.AjaxEX.dto.AjaxDto;
 import com.example.AjaxEX.dto.MovieDto;
+import com.example.AjaxEX.service.MovieService;
 
+import lombok.RequiredArgsConstructor;
 import oracle.jdbc.proxy.annotation.Post;
 
+@RequiredArgsConstructor
 @Controller // 일반 @Controller에서는 @ResponseBody를 사용해야 json포멧으로 변경해서 전송이 됨
 public class AjaxController {
 	
@@ -100,8 +105,8 @@ public class AjaxController {
 	// @ResponseBody(직렬화)  : DTO   -->  JSON
 	// ★★ 주의 : JSON 형식의 Data은 @@GetMapping으로 서버로 전송하면 오류가 발생한다.(글자수 제한 때문에) , POST로 전송해야함 
 	@PostMapping("/ex07")  
-	public @ResponseBody AjaxDto ex07(
-			@RequestBody AjaxDto ajaxDto
+	public @ResponseBody AjaxDto ex07(    // 값을 내보낸다 (2번)
+			@RequestBody AjaxDto ajaxDto  // 여기로 값이 주입되고 (1번)
 			) {
 		System.out.println("ex07 요청 성공");
 		System.out.println("Dto param1의 값 : " + ajaxDto.getParam1() );
@@ -167,25 +172,55 @@ public class AjaxController {
 
 	}
 	
-//	@PostMapping("/movie")
-//	public ResponseEntity movie_lab (
-//			@RequestBody MovieDto movieDto
-//			) {
-//		System.out.println("ex010 요청 성공");
-//		
-//		
-//		return null;
-//	}
-//	
+	// DI 객체 주입 : @RequiredArgsConstructor
+	private final MovieService movieService ; // 객체 주입 필요 (원래는 상단에 위치해야 한다. )
 	
+	// Movie 의 POST 요청을 처리하는 메소드 : insert 해라
+	@PostMapping("/movie")
+	// @ResponseBody(직렬화) : 메모리에서만 사용할 수 있는 객체를 네트워크로 보낼 수 있게 JSON으로 데이터 포멧을 변경하는 것 
+	public ResponseEntity<String>  movieInsert (  // <String> : 안에 타입을 적어줘도 되고 생략해도 된다.
+			
+			// client 에서 던지는 객체를 자바에서 input
+			@RequestBody MovieDto movieDto
+			) {  
+		System.out.println("============DTO 값을 출력============");
+		System.out.println(movieDto.getOriginal_title());
+		System.out.println(movieDto.getPoster_path());
+		System.out.println(movieDto.getOverview());
+		System.out.println(movieDto.getTitle());
+		System.out.println("============DTO 값을 출력============");
+		
+		String complate = movieService.movieInsert(movieDto);
+		return new ResponseEntity<String>(complate, HttpStatus.OK);
+	}
+
+
+	// // 서버에 get요청으로 DB에 값을 콘솔에 출력하기 [{}, {}, {}]
+	// get , movie 테이블의 전체 내용을 출력
 	@GetMapping("/movie")
-	public String movie() {
-		System.out.println("movie 요청 성공");
+	public ResponseEntity <List<MovieDto>>getMovieAll() {
+		System.out.println("movie 요청 잘받음");
 		
-		// res : index.html 파일의 소스코드가그대로 전송
-		
-		return "index";
+		List<MovieDto> movieList = movieService.selectAll();
+	return new ResponseEntity<>(movieList , HttpStatus.OK);
 	}
 	
+	
+	// 데이터 수정 로직 : put , /movie/{id}
+	@PutMapping("/movie/{id}")
+	public ResponseEntity updateMovie(
+			@PathVariable("id") int id ,
+			@RequestBody MovieDto movieDto
+			
+			) {
+		
+		System.out.println("put 요청처리됨");
+		System.out.println(id);
+		System.out.println(movieDto.getTitle());
+		
+		movieService.updateMovie(id, movieDto); 
+		
+		return ResponseEntity.ok(movieDto);
+	}
 	
 }

@@ -8,18 +8,122 @@
 </head>
 <body>
 	<h1>Ajax -Movie-LAB (영화 json 데이터 서버의 DB에 입력)</h1>
-	<button onclick="ajaxLab2Fn()">ajaxLab2 함수 호출 하기</button>
+	<button onclick="ajaxLab1Fn()">서버에 POST요청으로 DB에 값 넣기</button> <br><br>
+	<button onclick="ajaxLab2Fn()">서버에 get요청으로 DB에 값을 콘솔에 출력하기</button> <br><br>
+	<button onclick="ajaxLab3Fn()">서버에 put요청으로 DB에 값을 수정해서 출력하기</button> <br><br>
+	<button onclick="ajaxLab4Fn()">서버에 delete 요청으로 DB에 값을 삭제하고 출력하기</button> <br><br>
+	<button onclick="ajaxLab5Fn()">서버에 get 요청으로 DB에 값을 1개 출력하기</button> <br><br>
 			
 </body>
 
 <script type="text/javascript">
+		
+		const id = 1 ;
+		
+		const params = {
+				// 각 컬럼명
+				// 필드이름 : 필드값
+				"backdrop_path": "https://image.tmdb.org/t/p/w1280/r7Dfg9aRZ78gJsmDlCirIIlNH3d.jpg",
+				"id_num": 1234,
+				"original_language": "oooo",
+				"original_title": "홀홇롤",
+				"overview": "50kg로 세상을 거부한 채 살아가는 대학 강사 찰리는 남은 시간이 얼마 없음을 느끼고 오랫동안 만나지 못한 10대 딸 엘리를 집으로 초대한다. 그리고, 매일 자신을 찾아와 에세이 한 편을 완성하면 전 재산을 주겠다고 제안한다.",
+				"poster_path": "https://image.tmdb.org/t/p/w1280/q0xV5Lnq30JiegbVGBOvVwrgUDT.jpg",
+				"release_date": "2023-03-30",
+				"title": "더 웨일",
+				"vote_count": 7777}
+		
+		const ajaxLab3Fn = () => {
+			// put , /movie/1 (id값이 1)
+			console.log ("put요청 성공")
+			$.ajax ({
+				type : "put",
+				url : "/movie/1",  // Movie 테이블 중 id 1을 보여달라고 요청
+  				data : JSON.stringify(params),
+  				contentType : "application/json",
+				//요청이 성공했을때 실행되는 부분 
+				success:function(res){			//res <== 서버에서 리턴받은 DTO 
+					console.log("성공--", res)	
+					// location.href= '/';
+				},
+				//요청이 실패 했을때 실행되는 블락 (예외 처리 )
+				error:function(){
+					console.log("실패 ", res)
+				}			
+			});
+			
+			
+		}
+		
+		const ajaxLab4Fn = () => {
+			// delete , /movie/2
+			console.log ("delete요청 성공")
+			$.ajax ({
+				type : "delete",
+				url : "http://localhost:9696/movie/2",  // Movie 테이블 중 id 2를 삭제해달라고 요청
+  
+				//요청이 성공했을때 실행되는 부분 
+				success:function(res){			//res <== 서버에서 리턴받은 DTO 
+					console.log("성공--", res)	
+				},
+				//요청이 실패 했을때 실행되는 블락 (예외 처리 )
+				error:function(){
+					console.log("실패 ")
+				}			
+			});
+		}
+		
+		const ajaxLab5Fn = () => {
+			//get, /movie/55
+			console.log ("get요청 성공")
+			$.ajax ({
+				type : "get",
+				url : "http://localhost:9696/movie/55",  // Movie 테이블 중 id값 55를 보여달라고 요청
+  
+				//요청이 성공했을때 실행되는 부분 
+				success:function(res){			//res <== 서버에서 리턴받은 DTO 
+					console.log("성공--", res)	
+				},
+				//요청이 실패 했을때 실행되는 블락 (예외 처리 )
+				error:function(){
+					console.log("실패 ")
+				}			
+			});
+		}
 
+
+
+    // 서버에 get요청으로 DB에 값을 콘솔에 출력하기 [{}, {}, {}]
+	// ajax를 사용해서 get요청, /movie
+	// entity에 있는 것을 끄집어 내서 dto에 주입 , findAll()해서 출력 
 	const ajaxLab2Fn = () => {
+		console.log("함수호출성공");
+		// 파일을 전송할 필요는 없음 , 보여달라는 요청이기 때문에 
+		$.ajax ({
+			type : "get",
+			url : "http://localhost:9696/movie",  // 서버에게 Movie 테이블의 전체 리스트를 보여달라고 요청
+//			url : "http://localhost:9696/movie/1",  // Movie 테이블 중 1개를 보여달라고 요청
+		
+			//요청이 성공했을때 실행되는 부분 
+			success:function(res){			//res <== 서버에서 리턴받은 DTO 
+				console.log("성공--", res)	
+			},
+			//요청이 실패 했을때 실행되는 블락 (예외 처리 )
+			error:function(){
+				console.log("실패 ")
+			}			
+		});
+		
+	}
+	
+    // client 데이터를 서버에 POST요청으로 DB에 값 넣기
+	const ajaxLab1Fn = () => {
 		//console.log("함수 호출 성공 ")
 		//const val1 = "Hello Spring Boot!!"; 
 		
 		const params = {
 				// 각 컬럼명
+				// 필드이름 : 필드값
 				"backdrop_path": "https://image.tmdb.org/t/p/w1280/r7Dfg9aRZ78gJsmDlCirIIlNH3d.jpg",
 				"id_num": 785084,
 				"original_language": "en",
@@ -34,7 +138,7 @@
 			//요청 방식 : get / post
 			//요청 주소 : /ex07		<== Controller로 보내는 요청 주소 
 			type:"post",
-			url:"/movie/post",
+			url:"/movie",
 			
 			// parameter 값을 서버로 전송 할때, JavaScript 객체로 전송하는 것이 아니라 JSON 형식으로 전송했을때는 
 			// 서버에서 @RequestBody 어노테이션으로 받아야 한다. 
@@ -44,9 +148,12 @@
 			
 			//요청이 성공했을때 실행되는 부분 
 			success:function(res){			//res <== 서버에서 리턴받은 DTO 
-				console.log("성공", res)	
+				console.log("성공----", res)	
 			//	console.log("param1 의 값 : ", res.title)
 			//	console.log("param2 의 값 : ", res.poster_path)
+			
+			// window.location.href='/';   // 이동할 페이지
+			
 			},
 			
 			//요청이 실패 했을때 실행되는 블락 (예외 처리 )
