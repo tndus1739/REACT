@@ -60,11 +60,14 @@
 			console.log ("delete요청 성공")
 			$.ajax ({
 				type : "delete",
-				url : "http://localhost:9696/movie/2",  // Movie 테이블 중 id 2를 삭제해달라고 요청
+				url : "http://localhost:9696/movie/52",  // Movie 테이블 중 id 2를 삭제해달라고 요청 [movie : 테이블명 / 2 : 레코드]
   
+				// 서버에서 뷰페이지가 내려갈때는 앞에 주소["http://localhost:9696]를 생략가능하지만 그렇지 앟을 때는 생략하면 안됨		
+			
 				//요청이 성공했을때 실행되는 부분 
-				success:function(res){			//res <== 서버에서 리턴받은 DTO 
-					console.log("성공--", res)	
+				// 화살표 함수 사용해도 되고 함수명도 임의로 지정 가능
+				success: (deleteData) => {			
+					console.log("성공★", deleteData)	
 				},
 				//요청이 실패 했을때 실행되는 블락 (예외 처리 )
 				error:function(){
@@ -73,20 +76,23 @@
 			});
 		}
 		
+		
+		//get요청  /movie/55  리턴 : {}
 		const ajaxLab5Fn = () => {
-			//get, /movie/55
-			console.log ("get요청 성공")
+			//get요청  /movie/55  -->  [요청이름 중에 동사가 오면 안된다.]  <-- REST API(동사는 안되고 면사가 와야한다)
+			console.log ("get요청 성공55")
 			$.ajax ({
 				type : "get",
 				url : "http://localhost:9696/movie/55",  // Movie 테이블 중 id값 55를 보여달라고 요청
   
 				//요청이 성공했을때 실행되는 부분 
-				success:function(res){			//res <== 서버에서 리턴받은 DTO 
-					console.log("성공--", res)	
+				success:(getData) => {			//res <== 서버에서 리턴받은 DTO 
+					alert(`성공★★ : ${getData}`)	;
+				    console.log ("성공 : " , getData)
 				},
 				//요청이 실패 했을때 실행되는 블락 (예외 처리 )
-				error:function(){
-					console.log("실패 ")
+				error:(err) => {
+					console.log("실패"  , err )
 				}			
 			});
 		}

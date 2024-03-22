@@ -105,7 +105,7 @@ public class MovieService {
 		   System.out.println(movie.getVote_count());
 
 	    // Movie 객체에 movieDTO
-//		   movie = movieDto.createMovie();    // ModelMapper 사용
+        // movie = movieDto.createMovie();    // ModelMapper 사용
 		   
 		   movie.setTitle(movieDto.getTitle());                     // movie : db에서 끄집어낸 것
 		   movie.setVote_count(movieDto.getVote_count());      
@@ -118,4 +118,52 @@ public class MovieService {
 			
 			}
 	
+		// 삭제 메소드 ->  리턴 : void / 매개변수 : id 
+			public void deleteMovie (int id) {
+			
+			// id를 인풋 받아서 findById(id)
+			Optional<Movie> op = movieRepository.findById(id);  // Movie 객체가 Optional 안에 있음 
+			
+			Movie movie = null;
+			try {
+			
+			// op가 Null일 경우 예외 처리가 필요 
+			movie = op.get();  // Movie 객체를 끄집어낸다ㅣ (get 활용)
+			
+			  } catch (Exception e){
+				
+			}
+			
+			System.out.println(movie.getTitle());
+			
+			movieRepository.delete(movie);
+			
+			System.out.println("DB에서 삭제 성공됨");
+		}
+			
+		// 상세보기 : return - 하나의 데이터를 요청할 때는 MovieDto , 매개변수 : id
+			public MovieDto getMovieDetail (int id) {
+			
+			// id를 인풋 받아서 findById(id)
+			Optional<Movie> op = movieRepository.findById(id);  // Movie 객체가 Optional 안에 있음 
+				
+			Movie movie = null;
+			try {
+				
+			// op가 Null일 경우 예외 처리가 필요 
+			movie = op.get();  // Movie 객체를 끄집어낸다ㅣ (get 활용)
+				
+			 } catch (Exception e){
+					
+     		}
+			
+			// movie (Entiry) --> MovieDto 매핑
+			MovieDto movieDto = new MovieDto();
+			
+			movieDto = movieDto.of(movie);
+			
+			System.out.println("movieDto의 값 출력");
+			System.out.println(movieDto.getTitle());
+				return movieDto ;
+			}
 }
