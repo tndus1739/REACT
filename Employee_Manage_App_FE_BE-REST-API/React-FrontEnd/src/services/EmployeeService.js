@@ -25,7 +25,7 @@ class EmployeeService{
     }
 
     createEmployee(employee){
-        return axios.post(EMPLOYEE_BASE_REST_API_URL, employee)
+        return axios.post(EMPLOYEE_BASE_REST_API_URL, employee)    // axious의 post 요청
     }
 
    getEmployeeById(employeeId){
@@ -34,8 +34,8 @@ class EmployeeService{
     }
 
     updateEmployee(employeeId, employee){
-        return axios.put(EMPLOYEE_BASE_REST_API_URL + '/' +employeeId, employee);
-    }
+        return axios.put(EMPLOYEE_BASE_REST_API_URL + '/' +employeeId, employee);    // employee (2번째 인자) : 수정할 데이터 
+    }                                 
 
     deleteEmployee(employeeId){
         return axios.delete(EMPLOYEE_BASE_REST_API_URL + '/' + employeeId);

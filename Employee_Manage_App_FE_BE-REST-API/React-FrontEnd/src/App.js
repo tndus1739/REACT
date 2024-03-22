@@ -14,8 +14,9 @@ function App() {
           <Routes>
               <Route path = "/" element = { <ListEmployeeComponent />}></Route>
               <Route path = "/employees" element = { <ListEmployeeComponent />}></Route>
-              <Route path = "/add-employee" element = { <AddEmployeeComponent />} ></Route>
+              <Route path = "/add-employee" element = { <AddEmployeeComponent />} ></Route> 
               <Route path = "/edit-employee/:id" element = { <AddEmployeeComponent />}></Route>
+              {/* <AddEmployeeComponent /> : 등록할 때도 사용하고 수정할 때도 사용한다. */}
             </Routes>
         </div>
         <FooterComponent />

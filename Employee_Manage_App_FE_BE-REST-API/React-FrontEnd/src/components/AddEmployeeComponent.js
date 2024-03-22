@@ -8,21 +8,23 @@ const AddEmployeeComponent = () => {
     const [lastName, setLastName] = useState('')
     const [emailId, setEmailId] = useState('')
     const navigate = useNavigate();
-    const {id} = useParams();
+    const {id} = useParams();  // 파라미터에 id값이 있음
 
     const saveOrUpdateEmployee = (e) => {
-        e.preventDefault();
+        e.preventDefault();   // page 가 refresh 되는 것을 방지
 
         const employee = {firstName, lastName, emailId}
 
-        if(id){
-            EmployeeService.updateEmployee(id, employee).then((response) => {
-                navigate('/employees')
+        // 파라미터에 id값이 없으면 새사용자 등록 / id값이 있으면 사용자 수정
+
+        if(id){                                         // PUT : 수정(update)
+            EmployeeService.updateEmployee(id, employee).then((response) => {  // update 할때는 매개변수 2개 필요한다. (id값도 필요 )
+                navigate('/employees')    
             }).catch(error => {
                 console.log(error)
             })
 
-        }else{
+        }else{                                          // POST : 등록 (insert)
             EmployeeService.createEmployee(employee).then((response) =>{
 
                 console.log(response.data)
@@ -38,7 +40,7 @@ const AddEmployeeComponent = () => {
 
     useEffect(() => {
 
-        EmployeeService.getEmployeeById(id).then((response) =>{
+        EmployeeService.getEmployeeById(id).then((response) =>{    // id값을 종해서 get 한 것을 setter에 주입
             setFirstName(response.data.firstName)
             setLastName(response.data.lastName)
             setEmailId(response.data.emailId)
@@ -47,7 +49,7 @@ const AddEmployeeComponent = () => {
         })
     }, [])
 
-    const title = () => {
+    const title = () => {     // title호출했을때 id값이 있으면 사원 수정 id값이 없으면 사원추가
 
         if(id){
             return <h2 className = "text-center">사원 수정</h2>
@@ -74,7 +76,7 @@ const AddEmployeeComponent = () => {
                                         placeholder = "이름을 넣어주세요"
                                         name = "firstName"
                                         className = "form-control"
-                                        value = {firstName}
+                                        value = {firstName}   // usestate 값 
                                         onChange = {(e) => setFirstName(e.target.value)}
                                     >
                                     </input>

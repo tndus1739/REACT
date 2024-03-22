@@ -13,7 +13,8 @@ const ListEmployeeComponent = () => {
 
     const getAllEmployees = () => {
         EmployeeService.getAllEmployees().then((response) => {
-            setEmployees(response.data)
+            console.log("성공 ----" ,response);
+            setEmployees(response.data)  // data 배열
             console.log(response.data);
         }).catch(error =>{
             console.log(error);
@@ -21,12 +22,12 @@ const ListEmployeeComponent = () => {
     }
 
     const deleteEmployee = (employeeId) => {
-       EmployeeService.deleteEmployee(employeeId).then((response) =>{
+        EmployeeService.deleteEmployee(employeeId).then((response) =>{
         getAllEmployees();
 
-       }).catch(error =>{
-           console.log(error);
-       })
+        }).catch(error =>{
+            console.log(error);
+        })
         
     }
 
@@ -46,7 +47,7 @@ const ListEmployeeComponent = () => {
                 </thead>
                 <tbody>
                     {
-                        employees.map(
+                        employees.map(     // 배열에 있는 것을 map을 사용해서 끄집어냄
                             employee =>
                             <tr key = {employee.id}> 
                                 <td> {employee.id} </td>

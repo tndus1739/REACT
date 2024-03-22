@@ -26,7 +26,8 @@ import com.mysite.rest.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 
 @CrossOrigin("*")		//CORS 셋팅 
-@RestController         // @RestController : 하위에 있는 요청주소에 대해서  return 값들이 모두 JSON 포멧으로 변환됨
+@RestController  // REST API 통신 @Resposebody + @Controller       
+// @RestController : 하위에 있는 요청주소에 대해서  return 값들이 모두 JSON 포멧으로 변환됨
 @RequestMapping ("/api/employee")   //@RequestMapping : 하위 요청에 상속됨
 @RequiredArgsConstructor
 public class EmployeeController {

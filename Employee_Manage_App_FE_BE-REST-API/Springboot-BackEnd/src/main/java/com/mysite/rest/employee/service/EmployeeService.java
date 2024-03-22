@@ -26,6 +26,8 @@ public class EmployeeService {   // EmployeeRepository를 객체화해서 만들
     public Employee createEmployee(EmployeeDTO employeeDTO) {
     	Employee employee = new Employee(employeeDTO); 
     	
+    	System.out.println("사원등록성공");
+    	
     	return employeeRepository.save(employee); 
     }
     
