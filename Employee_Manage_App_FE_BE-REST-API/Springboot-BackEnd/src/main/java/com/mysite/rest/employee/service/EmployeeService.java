@@ -13,7 +13,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class EmployeeService {   // EmployeeRepository를 객체화해서 만들어 놓음
     private final EmployeeRepository employeeRepository;
-    
+     
     public void Test () {
     }
     
@@ -28,7 +28,7 @@ public class EmployeeService {   // EmployeeRepository를 객체화해서 만들
     	
     	System.out.println("사원등록성공");
     	
-    	return employeeRepository.save(employee); 
+    	return employeeRepository.save(employee);
     }
     
 }

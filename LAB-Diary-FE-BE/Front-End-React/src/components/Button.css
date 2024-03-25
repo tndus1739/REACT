@@ -1,0 +1,29 @@
+.Button {
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  /* padding-top: 5px; */
+  /* padding-bottom: 5px; */
+  padding-left: 20px;
+  padding-right: 20px;
+  font-size: 25px;
+  white-space: nowrap;
+  font-family: "Dongle", sans-serif;
+}
+
+.Button_default {
+  background-color: #ffffff61;
+  border: 0.3px solid #fff;
+  color: rgb(82, 82, 82);
+  font-family: "Dongle", sans-serif;
+}
+.Button_positive {
+  background-color: #bfcef4d9;
+  color: white;
+  font-family: "Dongle", sans-serif;
+}
+.Button_negative {
+  background-color: #eeb0c6;
+  color: white;
+  font-family: "Dongle", sans-serif;
+}
