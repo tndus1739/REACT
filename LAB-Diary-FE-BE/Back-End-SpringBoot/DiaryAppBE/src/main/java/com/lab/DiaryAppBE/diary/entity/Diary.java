@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 
 import com.lab.DiaryAppBE.diary.dto.DiaryDto;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -31,11 +32,14 @@ public class Diary {
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@Column (name = "content")
 	private String content;
 	
+	@Column (name = "emotion_id")
 	private int emotionId;
 	
 	// 1970.01.01  ===> 숫자 
+	@Column (name = "date")
 	private Timestamp Date;
 	
 }

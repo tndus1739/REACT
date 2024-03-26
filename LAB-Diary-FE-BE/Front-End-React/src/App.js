@@ -121,8 +121,26 @@ function App() {
   // 하위 컴포넌트에서 값이 올라옴
   // date : yyyy-mm-ddd  --> TimeTemp 형식의 날자 형식으로 변환
   const onCreate = (date , content , emotionId) => {
-    
 
+    console.log("date : " + date) ; 
+  
+    
+    const diary = {
+      date:new Date(date).getTime(),
+      content: content,
+      emotionId: emotionId
+  }
+
+  console.log ("onCreate : " , diary ); 
+
+
+  DiaryService.createDiary(diary).then((res) => {
+
+  })
+  DiaryService.getAllDiary().then((res)=>{
+      console.log("data", res.data);
+      setData(res.data)
+  })
 
     // dispatch ({
     //     type : "CREATE",
@@ -140,7 +158,23 @@ function App() {
 
   const onUpdate = (id, date, emotionId, content) => {
 
+    const diary = {
+      id: id,
+      date:new Date(date).getTime(),
+      content: content,
+      emotionId: emotionId}
 
+    DiaryService.updateDiary(diary).then((res) => {
+      console.log(res)
+  })
+
+  console.log(`업데이트 날짜: ${date}`)
+  console.log(`포맷 완료된 날짜: ${new Date(date).getTime()}`)
+
+  DiaryService.getAllDiary().then((res)=>{
+      console.log("data", res.data);
+      setData(res.data)
+  })
     // console.log(`App 컴포넌트 :업데이트 날짜 : ${date}`);
     // console.log(`포멧 완료된 날짜 : ${new Date(date).getTime()}`);
 
@@ -158,7 +192,12 @@ function App() {
   }
 
   const onDelete = (targetId) => {
-      console.log(`하위에서 삭제 id : ${targetId}`);
+
+    DiaryService.deleteDiary(targetId).then((res) => {
+      console.log("data", res)
+  })
+
+      //console.log(`하위에서 삭제 id : ${targetId}`);
       // id값을 input받아서 dispatch 호출
       // dispatch ({
       //   type : "DELETE",

@@ -1,5 +1,6 @@
 package com.lab.DiaryAppBE.diary.dto;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 import lombok.AllArgsConstructor;
@@ -21,7 +22,7 @@ public class DiaryDto {
 	
 	private int emotionId;
 	
-	private LocalDateTime createDate;
+	private Timestamp Date;
 	
 	
 	

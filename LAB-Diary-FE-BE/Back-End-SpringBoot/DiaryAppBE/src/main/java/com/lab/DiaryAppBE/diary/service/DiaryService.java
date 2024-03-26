@@ -22,12 +22,12 @@ public class DiaryService {
 		return diaryRepository.findAll();
 	}
 	
-	// Diary 정보
+	// Diary insert
 	public Diary createDiary (DiaryDto diaryDto) {
 		Diary diary = new Diary(diaryDto); ////-----------------------------
 		
 		System.out.println("다이어리 등록성공");
-		
+		System.out.println(diaryDto);
 		return diaryRepository.save(diary);
 		
 	}

@@ -39,19 +39,6 @@ public class DiaryController {
 	private final DiaryService diaryService;
 	
 	
-	
-	
-	// get : 전체 diary list
-	// http://localhost:9393/diary
-//	@GetMapping("/diary")
-//	
-//	public String Diary () {
-//		System.out.println("diary 호출성공");
-//		return "diary연결";
-//	}
-	
-	
-	
 	@GetMapping("/diary")
 	
 	public List<Diary> getAllDiary () {
@@ -62,6 +49,9 @@ public class DiaryController {
 	// diary 생성 REST API
 	@PostMapping("/diary")
 	public Diary createDiary(@RequestBody DiaryDto diaryDto) {
+		
+		
+		System.out.println(diaryDto);
 		
 		return diaryService.createDiary(diaryDto);
 	}
